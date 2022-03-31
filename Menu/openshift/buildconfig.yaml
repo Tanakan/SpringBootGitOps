@@ -1,0 +1,33 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    build: my-demo-app
+  name: my-demo-app
+  namespace: test
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: my-demo-app:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      uri: https://gitlab.consulting.redhat.com/mastanak/gitops-test
+    type: Git
+    contextDir: /Menu
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: java:11
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - type: ConfigChange
+  - type: ImageChange
