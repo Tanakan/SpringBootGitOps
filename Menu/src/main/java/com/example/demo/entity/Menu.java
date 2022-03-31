@@ -25,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @Entity
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class Menu {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
